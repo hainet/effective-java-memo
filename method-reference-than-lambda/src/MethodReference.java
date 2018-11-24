@@ -14,16 +14,16 @@ public class MethodReference {
         map.merge("key", 1, (a, b) -> a + b);
         System.out.println(map.get("key"));
 
-        // 必要に応じてラムダの定義を記述すると危険である上、
-        // 何をしているか命名する必要があったためメソッドとして切り出した。
+        // 必要に応じてラムダの定義を記述することは誤りを生む。
+        // また、操作を命名するためにメソッドとして切り出すことができる。
         map.merge("key", 1, (a, b) -> MethodReference.sum(a, b));
         System.out.println(map.get("key"));
 
-        // 引数と返り値の型が一致しているのであればメソッド参照に置き換えられる。
+        // ラムダの引数とラムダの返り値の型が一致するメソッドでメソッド参照に置き換えられる。
         map.merge("key", 1, MethodReference::sum);
         System.out.println(map.get("key"));
 
-        // もっとも、このような標準的な計算はJavaが提供している。
+        // もっとも、このような標準的な計算はJavaが提供しているが...
         map.merge("key", 1, Integer::sum);
         System.out.println(map.get("key"));
 
