@@ -12,11 +12,11 @@ public class Randoms {
     private static void random() {
         final long start = System.currentTimeMillis();
 
-        new Random().ints(10_000_000, 0, 10_000_000)
+        System.out.println(new Random().ints(10_000_000, 0, 10_000_000)
                 .parallel()
                 .mapToObj(BigInteger::valueOf)
                 .filter(i -> i.isProbablePrime(50))
-                .forEachOrdered(System.out::println);
+                .count());
 
         System.out.println("Processed in " + (System.currentTimeMillis() - start) + "ms");
     }
@@ -24,11 +24,11 @@ public class Randoms {
     private static void splittableRandom() {
         final long start = System.currentTimeMillis();
 
-        new SplittableRandom().ints(10_000_000, 0, 10_000_000)
+        System.out.println(new SplittableRandom().ints(10_000_000, 0, 10_000_000)
                 .parallel()
                 .mapToObj(BigInteger::valueOf)
                 .filter(i -> i.isProbablePrime(50))
-                .forEachOrdered(System.out::println);
+                .count());
 
         System.out.println("Processed in " + (System.currentTimeMillis() - start) + "ms");
     }
